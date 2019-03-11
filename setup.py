@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 setup(
     name = "cave-dianping",
-    version = "0.1.17",
+    version = "0.0.1",
     keywords = ("pip", "dianping","大众点评","爬虫"),
     description = "dianping base class. 大众点评 爬虫 基础",
     long_description = "dianping base class. 大众点评 爬虫 基础",
