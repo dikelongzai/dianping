@@ -39,24 +39,25 @@ from model import Stores, Reviews, Pics, Cities
 #         city.save()
 
 
-cities = Cities.select().where(Cities.parentcityid==0).order_by(Cities.cityid)
-for v in cities:
-    print(v.cityid)
-    city = City(int(v.cityid))
-    shops = city.search('喜茶')
+# cities = Cities.select().where(Cities.parentcityid==0).order_by(Cities.cityid)
+# for v in cities:
+#     print(v.cityid)
+#     city = City(int(v.cityid))
+#     shops = city.search('海底捞火锅')
 
-    for v in shops:
-        try:
-            store = Stores.get(source = v.id)
-        except:
-            store = Stores()
-            store.source = v.id
-        store.origin = 2
-        store.name = v.name + v.branchName 
-        store.save()
+#     for v in shops:
+#         try:
+#             store = Stores.get(source = v.id)
+#         except:
+#             store = Stores()
+#             store.source = v.id
+#         store.origin = 2
+#         store.name = v.name + v.branchName
+#         store.save()
 
-exit()
-stores = Stores.select().where(Stores.name % '%喜茶%',Stores.reviews>=20,Stores.id>=1150).order_by(Stores.id)
+
+
+stores = Stores.select().where(Stores.name % '%海底捞%', Stores.id >=  2).order_by(Stores.id)
 for store in stores:
     print('store.id:'+str(store.id))
     print(store.source)
@@ -67,13 +68,14 @@ for store in stores:
         reviews = shop.get_reviews(page)
         print(reviews)
         if not len(reviews):
-            current=time.strftime('%Y-%m-%d', time.localtime(time.time()-2592000))
+            current = time.strftime(
+                '%Y-%m-%d', time.localtime(time.time()-2592000))
             break
         page = page+1
         time.sleep(6)
         for v in reviews:
             print(v)
-            current=v.published_at
+            current = v.published_at
             try:
                 Reviews.get(origin=2, source=v.id)
             except:
@@ -84,12 +86,12 @@ for store in stores:
                 review.shop_source = store.source
                 review.published_at = v.published_at
                 review.pics = v.pics
-                review.content = v.content
+                # review.content = v.content
                 review.save()
             if len(v.pics):
                 for img in v.pics:
                     try:
-                        pic=Pics.get(origin=2, url=img.url)
+                        pic = Pics.get(origin=2, url=img.url)
                     except:
                         pic = Pics()
                         pic.origin = 2

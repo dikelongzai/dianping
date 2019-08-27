@@ -1,6 +1,6 @@
 from peewee import *
 
-database = MySQLDatabase('fapiao', **{'charset': 'utf8', 'use_unicode': True, 'host': 'localhost', 'user': 'root', 'password': 'pass@dbmima'})
+database = MySQLDatabase('fapiao', **{'charset': 'utf8', 'use_unicode': True, 'host': '47.101.216.99', 'user': 'root', 'password': 'pass@dbmima'})
 
 class UnknownField(object):
     def __init__(self, *_, **__): pass

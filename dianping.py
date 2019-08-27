@@ -273,6 +273,10 @@ class Shop:
 class Review:
 
     id = None
+    content = None
+    avg_price = None
+    user_nickname = None
+    published_at = None
 
     def __init__(self, review):
         if isinstance(review, int):
